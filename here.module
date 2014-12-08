@@ -1,0 +1,30 @@
+<?php
+
+
+/**
+* Implements hook_ctools_plugin_directory(). @Note this is deprecated in Drupal 8.
+*/
+function here_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
+/**
+ * Implements hook_openlayers_layer_types().
+ */
+function here_openlayers_layer_types() {
+  $layer_types['here_map_tile_layer_type'] = array(
+    'title' => t('Here Map Tile API'),
+    'description' => t('Creates a map using Here Map Tile API Layer'),
+  );
+
+  foreach($layer_types as $key => $data) {
+    $layer_types[$key]['path'] = drupal_get_path('module', 'here') . '/plugins/layer_types';
+    $layer_types[$key]['layer_type'] = array(
+      'class' => $key,
+      'file' => $key . '.inc',
+      'parent' => 'openlayers_layer_type',
+    );
+  }
+
+  return $layer_types;
+}

@@ -1,0 +1,6 @@
+name = "Here API"
+description = "Integrates the Here API into the OpenLayers API"
+core = 7.x
+package = "Here"
+dependencies[] = openlayers
+files[] = plugins/layer_types/here_map_tile_layer_type.inc
