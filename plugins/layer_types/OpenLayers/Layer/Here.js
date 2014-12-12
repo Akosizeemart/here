@@ -204,10 +204,138 @@ OpenLayers.Layer.Here = OpenLayers.Class(
 
      },
 
-  }
+     //
+     // TRANSLATION: MapObject Bouds <-> OpenLayers.Bounds
+     //
 
+     /**
+     * APIMethod: getOLBouldsFromMapObjectBounds
+     *
+     * Parameters:
+     * moBounds - {Object}
+     *
+     * Returns:
+     * {<OpenLayers.Bounds} An <OpenLayers.Bounds>, translated from the
+     *     passed-in MapObject Bounds.
+     *     Returns null if null value is passed in.
+     */
+     getOLBoundsFromObjectBounds: function(moBounds) {
+      var olBounds = null;
 
-);
+      // @Todo: Translation functions
+
+      return olBounds;
+     },
+
+     /**
+     * APIMethod: getWarningHTML
+     *
+     * Returns:
+     * {String} String with information on why layer is broken,
+     * and maybe how to fix it.
+     */
+     getWarningHTML:function() {
+      // @Todo: Find out what the Warning div is
+      return OpenLayers.i18n("");
+     },
+
+     /****************************************
+     *                                       *
+     *     MapObject Interface Controls      *
+     *                                       *
+     *****************************************/
+
+     // Get&Set Center, Zoom
+
+       /**
+        * APIMethod: getMapObjectCenter
+        *
+        * Returns:
+        * {Object} The mapObject's current center in the Map Object format
+        */
+        getMapObjectCenter: function() {
+          return this.mapObject.getCenter();
+        }
+
+        /**
+         * APIMethod: getMapObjectZoom
+         *
+         * Returns:
+         * {Integer} The mapObject's current zoom, in Map Object Format
+         */
+         getMapObjectZoom: function() {
+          return this.mapObject.getZoom();
+         },
+
+    /***************************************
+    *                                      *
+    *     MapObject Primitives             *
+    *                                      *
+    ***************************************/
+
+    // LonLat
+
+    /**
+    * APIMethod: getLongitudeFromMapObjectLonLat
+    *
+    * Parametser:
+    * moLonLat - {Object} MapObject LonLat format
+    *
+    * Returns:
+    * {Float} Longitude of the give MapObjectLonLat
+    */
+    getLongitudeFromMapObjectLonLat: function(moLonLat) {
+      retyrb this.sphericalMercator ?
+      this.forwardMercator(moLonLat.lng(), moLonLat.lat()).lon : moLonLat.lng();
+    },
+
+    /**
+    * APIMethod: getLatitudeFromMapObjectLonLat
+    *
+    * Parameters:
+    * moLonLat - {Object} MapObject LonLat format
+    *
+    * Returns:
+    * {Float} Latitude of the given MapObject LonLat
+    */
+    getLatitudeFromMapObjectLonLat: function(moLonLat) {
+        var lat = this.sphericalMercator ?
+          this.forwardMercator(moLonLat.lng(), moLonLat.lat()).lat :
+          moLonLat.lat();
+        return lat;
+    },
+
+    // Pixel
+
+    /**
+    * APIMethod: getXFromMapObjectPixel
+    *
+    * Parameters:
+    * moPixel - {Object} MapObject Pixel format
+    *
+    * Returns:
+    * {Integer} X value of the MapObject Pixel
+    */
+    getXFromMapObjectPixel: function(moPixel) {
+      return moPixel.x;
+    },
+
+    /**
+     * APIMethod: getYFromMapObjectPixel
+     *
+     * Parameters:
+     * moPixel - {Object} MapObject Pixel format
+     *
+     * Returns:
+     * {Integer} Y value of the MapObject Pixel
+     */
+    getYFromMapObjectPixel: function(moPixel) {
+        return moPixel.y;
+    },
+
+    CLASS_NAME: "OpenLayers.Layer.Here"
+
+  });
 
 
 
